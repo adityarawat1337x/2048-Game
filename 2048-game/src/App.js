@@ -1,5 +1,5 @@
 import "./App.css";
-import Cube from "./Cube";
+import Game from "./Game";
 
 const arr = [
   [2, 0, 4, 8],
@@ -11,16 +11,12 @@ const arr = [
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1 className="heading">2048 Game</h1>
-      </header>
-      <section>
-        <div className="cont">
-          {arr.map((ls) =>
-            ls.map((key, index) => <Cube key={index} data={key} />)
-          )}
-        </div>
-      </section>
+      {/* <div className="cont">
+        {arr.map((ls) =>
+          ls.map((key, index) => <Cube key={index} data={key} />)
+        )}
+      </div> */}
+      <Game />
     </div>
   );
 }
