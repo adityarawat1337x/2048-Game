@@ -41,28 +41,62 @@
   font-weight: 600;
 }
 
-.heading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.heading > span {
-  margin-inline: 2rem;
-}
-
-.heading .title {
+.title {
   font-weight: 800;
-  font-size: 3rem;
+  font-size: 4rem;
   color: #fffffe;
+}
+
+.game-explanation {
+  width: 70%;
+  margin-inline: auto;
+  font-size: 1.1rem;
+  color: #f8f5f0;
+}
+
+.game-explanation .important {
+  font-size: 1.5rem;
+}
+
+.App .score-container {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .newgamebtn {
   padding: 0.5rem;
-  background: #2cb67d;
+  background: #269b6a;
   color: #f8f5f0;
   width: 7rem;
+  border: 0;
   border-radius: 7px;
+  font-size: 1rem;
   font-weight: 900;
   cursor: pointer;
+}
+
+.newgamebtn:hover {
+  background-color: #2cb67d;
+}
+
+.App .score {
+  padding: 0.5rem;
+  background: #a0dce061;
+  color: #f8f5f0;
+  border-radius: 7px;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.App .score-container .score-wrapper {
+  display: flex;
+  width: 130px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.App .score-container .score-wrapper .high-score {
+  opacity: 0.7;
 }

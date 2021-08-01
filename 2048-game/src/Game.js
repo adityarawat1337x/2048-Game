@@ -1,6 +1,8 @@
 import React, { useState, useEffect, forwardRef } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useEvent, getColors } from "./util";
+import { motion, AnimatePresence } from "framer-motion";
+
 // import Swipe from "react-easy-swipe";
 
 function Game() {
@@ -8,6 +10,9 @@ function Game() {
   const DOWN_ARROW = 40;
   const LEFT_ARROW = 37;
   const RIGHT_ARROW = 39;
+
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
 
   const [data, setData] = useState([
     [0, 0, 0, 0],
@@ -88,6 +93,9 @@ function Game() {
           if (b[slow] === b[fast]) {
             b[slow] = b[slow] + b[fast];
             b[fast] = 0;
+
+            setScore(score + b[slow]);
+
             fast = slow + 1;
             slow++;
           } else {
@@ -134,6 +142,9 @@ function Game() {
           if (b[slow] === b[fast]) {
             b[slow] = b[slow] + b[fast];
             b[fast] = 0;
+
+            setScore(score + b[slow]);
+
             fast = slow - 1;
             slow--;
           } else {
@@ -179,6 +190,9 @@ function Game() {
           if (b[slow][i] === b[fast][i]) {
             b[slow][i] = b[slow][i] + b[fast][i];
             b[fast][i] = 0;
+
+            setScore(score + b[slow][i]);
+
             fast = slow - 1;
             slow--;
           } else {
@@ -223,6 +237,9 @@ function Game() {
           if (b[slow][i] === b[fast][i]) {
             b[slow][i] = b[slow][i] + b[fast][i];
             b[fast][i] = 0;
+
+            setScore(score + b[slow][i]);
+
             fast = slow + 1;
             slow++;
           } else {
@@ -286,6 +303,7 @@ function Game() {
     ];
 
     addNumber(emptyGrid);
+    setScore(0);
     setData(emptyGrid);
   };
 
@@ -326,11 +344,23 @@ function Game() {
 
   return (
     <div className="App">
-      <div className="heading">
-        <span className="title">2048</span>
-        <span className="newgamebtn" onClick={resetGame}>
+      <span className="title">2048</span>
+      <div className="score-container">
+        <button className="newgamebtn" onClick={resetGame}>
           NEW GAME
-        </span>
+        </button>
+        <div className="score-wrapper">
+          <div className="score">
+            <div className="score-wrapper">
+              <span>Score</span>
+              <span className="high-score">Top</span>
+            </div>
+            <div className="score-wrapper">
+              <span>{score}</span>
+              <span className="high-score">{score}</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="cont">
         {gameOver && (
@@ -377,19 +407,23 @@ function Game() {
                   ))}
               );
             })} */}
-        {data.map((ls) =>
-          ls.map((key, index) => <Cube key={index} num={key} />)
-        )}
+        <AnimatePresence>
+          {data.map(
+            (ls) => ls.map((key, index) => <Cube key={index} num={key} />)
+            // <Cube key={ls} num={ls} />
+          )}
+        </AnimatePresence>
         {/* </Swipe> */}
       </div>
-      <div style={{ width: "inherit" }}>
+      <div>
         <p class="game-explanation">
           <div>
-            <strong class="important">How to play:</strong>
+            <strong class="important">How to play :</strong>
           </div>
           <div>
-            Use your <strong>arrow keys</strong> to move the tiles. When two
-            tiles with the same number touch, they{" "}
+            Use your <strong>arrow keys</strong> to move the tiles.
+            <br />
+            When two tiles with the same number touch, they{" "}
             <strong>merge into one!</strong>
           </div>
         </p>
@@ -401,17 +435,30 @@ function Game() {
 const Cube = ({ num }) => {
   const { blockStyle } = style;
 
+  const animation = {
+    initial: {
+      scale: 0,
+    },
+    animate: {
+      scale: 1,
+      delay: 0,
+    },
+    exit: {
+      scale: 0,
+    },
+  };
+
   console.log("yero:", num);
   return (
-    <div
+    <motion.div
       className="cube"
       style={{
         background: getColors(num),
         color: num === 2 || num === 4 ? "#645B52" : "#F7F4EF",
       }}
     >
-      {num !== 0 ? num : ""}
-    </div>
+      <motion.div layout>{num !== 0 ? num : ""}</motion.div>
+    </motion.div>
   );
 };
 
