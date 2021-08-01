@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Cube from "./Cube";
 
@@ -12,11 +11,16 @@ const arr = [
 function App() {
   return (
     <div className="App">
-      <div className="cont">
-        {arr.map((ls) =>
-          ls.map((key, index) => <Cube key={index} data={key} />)
-        )}
-      </div>
+      <header>
+        <h1 className="heading">2048 Game</h1>
+      </header>
+      <section>
+        <div className="cont">
+          {arr.map((ls) =>
+            ls.map((key, index) => <Cube key={index} data={key} />)
+          )}
+        </div>
+      </section>
     </div>
   );
 }
