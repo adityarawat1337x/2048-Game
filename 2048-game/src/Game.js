@@ -2,7 +2,6 @@ import React, { useState, useEffect, forwardRef } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useEvent, getColors } from "./util";
 import Swipe from "react-easy-swipe";
-import FlipMove from "react-flip-move";
 
 function Game() {
   const UP_ARROW = 38;
@@ -326,7 +325,7 @@ function Game() {
   useEvent("keydown", handleKeyDown);
 
   return (
-    <div className="App">
+    <div className="asdw">
       <div
         style={{
           width: 345,
@@ -357,18 +356,7 @@ function Game() {
             </div>
           </div>
         </div>
-        <div
-          style={{
-            background: "#AD9D8F",
-            width: "max-content",
-            height: "max-content",
-            margin: "auto",
-            padding: 5,
-            borderRadius: 5,
-            marginTop: 10,
-            position: "relative",
-          }}
-        >
+        <div className="cont">
           {gameOver && (
             <div style={style.gameOverOverlay}>
               <div>
@@ -397,7 +385,7 @@ function Game() {
               </div>
             </div>
           )}
-          <Swipe
+          {/* <Swipe
             onSwipeDown={() => {
               swipeDown();
             }}
@@ -405,19 +393,18 @@ function Game() {
             onSwipeRight={() => swipeRight()}
             onSwipeUp={() => swipeUp()}
             style={{ overflowY: "hidden" }}
-          >
-            <FlipMove>
-              {data.map((row, oneIndex) => {
-                return (
-                  <div style={{ display: "flex" }} key={oneIndex}>
-                    {row.map((digit, index) => (
-                      <Block num={digit} key={index} />
-                    ))}
-                  </div>
-                );
-              })}
-            </FlipMove>
-          </Swipe>
+          > */}
+          {/* {data.map((row, oneIndex) => {
+              return (
+                  {row.map((digit, index) => (
+                    <Block num={digit} key={index} />
+                  ))}
+              );
+            })} */}
+          {data.map((ls) =>
+            ls.map((key, index) => <Cube key={index} num={key} />)
+          )}
+          {/* </Swipe> */}
         </div>
         <div style={{ width: "inherit" }}>
           <p class="game-explanation">
@@ -431,15 +418,14 @@ function Game() {
   );
 }
 
-const Block = forwardRef(({ num }, ref) => {
+const Cube = ({ num }) => {
   const { blockStyle } = style;
 
   console.log("yero:", num);
   return (
     <div
-      ref={ref}
+      className="cube"
       style={{
-        ...blockStyle,
         background: getColors(num),
         color: num === 2 || num === 4 ? "#645B52" : "#F7F4EF",
       }}
@@ -447,21 +433,9 @@ const Block = forwardRef(({ num }, ref) => {
       {num !== 0 ? num : ""}
     </div>
   );
-});
+};
 
 const style = {
-  blockStyle: {
-    height: 80,
-    width: 80,
-    background: "lightgray",
-    margin: 3,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 45,
-    fontWeight: "800",
-    color: "white",
-  },
   newGameButton: {
     padding: 10,
     background: "#846F5B",
