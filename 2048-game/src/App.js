@@ -10,14 +10,14 @@ const arr = [
 
 function App() {
   return (
-    <div className="App">
+    <>
       {/* <div className="cont">
         {arr.map((ls) =>
           ls.map((key, index) => <Cube key={index} data={key} />)
         )}
       </div> */}
       <Game />
-    </div>
+    </>
   );
 }
 

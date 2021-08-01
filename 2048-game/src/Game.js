@@ -1,8 +1,7 @@
 import React, { useState, useEffect, forwardRef } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useEvent, getColors } from "./util";
-import Swipe from "react-easy-swipe";
-import FlipMove from "react-flip-move";
+// import Swipe from "react-easy-swipe";
 
 function Game() {
   const UP_ARROW = 38;
@@ -327,77 +326,42 @@ function Game() {
 
   return (
     <div className="App">
-      <div
-        style={{
-          width: 345,
-          margin: "auto",
-          marginTop: 30,
-        }}
-      >
-        <div style={{ display: "flex" }}>
-          <div
-            style={{
-              fontFamily: "sans-serif",
-              flex: 1,
-              fontWeight: "700",
-              fontSize: 60,
-              color: "#776e65",
-            }}
-          >
-            2048
-          </div>
-          <div
-            style={{
-              flex: 1,
-              marginTop: "auto",
-            }}
-          >
-            <div onClick={resetGame} style={style.newGameButton}>
-              NEW GAME
-            </div>
-          </div>
-        </div>
-        <div
-          style={{
-            background: "#AD9D8F",
-            width: "max-content",
-            height: "max-content",
-            margin: "auto",
-            padding: 5,
-            borderRadius: 5,
-            marginTop: 10,
-            position: "relative",
-          }}
-        >
-          {gameOver && (
-            <div style={style.gameOverOverlay}>
+      <div className="heading">
+        <span className="title">2048</span>
+        <span className="newgamebtn" onClick={resetGame}>
+          NEW GAME
+        </span>
+      </div>
+      <div className="cont">
+        {gameOver && (
+          <div style={style.gameOverOverlay}>
+            <div>
+              <div
+                style={{
+                  fontSize: 30,
+                  fontFamily: "sans-serif",
+                  fontWeight: "900",
+                  color: "#776E65",
+                }}
+              >
+                Game Over
+              </div>
               <div>
                 <div
                   style={{
-                    fontSize: 30,
-                    fontFamily: "sans-serif",
-                    fontWeight: "900",
-                    color: "#776E65",
+                    flex: 1,
+                    marginTop: "auto",
                   }}
                 >
-                  Game Over
-                </div>
-                <div>
-                  <div
-                    style={{
-                      flex: 1,
-                      marginTop: "auto",
-                    }}
-                  >
-                    <div onClick={resetGame} style={style.tryAgainButton}>
-                      Try Again
-                    </div>
+                  <div onClick={resetGame} style={style.tryAgainButton}>
+                    Try Again
                   </div>
                 </div>
               </div>
             </div>
-          )}
-          <Swipe
+          </div>
+        )}
+        {/* <Swipe
             onSwipeDown={() => {
               swipeDown();
             }}
@@ -405,41 +369,43 @@ function Game() {
             onSwipeRight={() => swipeRight()}
             onSwipeUp={() => swipeUp()}
             style={{ overflowY: "hidden" }}
-          >
-            <FlipMove>
-              {data.map((row, oneIndex) => {
-                return (
-                  <div style={{ display: "flex" }} key={oneIndex}>
-                    {row.map((digit, index) => (
-                      <Block num={digit} key={index} />
-                    ))}
-                  </div>
-                );
-              })}
-            </FlipMove>
-          </Swipe>
-        </div>
-        <div style={{ width: "inherit" }}>
-          <p class="game-explanation">
-            <strong class="important">How to play:</strong> Use your{" "}
-            <strong>arrow keys</strong> to move the tiles. When two tiles with
-            the same number touch, they <strong>merge into one!</strong>
-          </p>
-        </div>
+          > */}
+        {/* {data.map((row, oneIndex) => {
+              return (
+                  {row.map((digit, index) => (
+                    <Block num={digit} key={index} />
+                  ))}
+              );
+            })} */}
+        {data.map((ls) =>
+          ls.map((key, index) => <Cube key={index} num={key} />)
+        )}
+        {/* </Swipe> */}
+      </div>
+      <div style={{ width: "inherit" }}>
+        <p class="game-explanation">
+          <div>
+            <strong class="important">How to play:</strong>
+          </div>
+          <div>
+            Use your <strong>arrow keys</strong> to move the tiles. When two
+            tiles with the same number touch, they{" "}
+            <strong>merge into one!</strong>
+          </div>
+        </p>
       </div>
     </div>
   );
 }
 
-const Block = forwardRef(({ num }, ref) => {
+const Cube = ({ num }) => {
   const { blockStyle } = style;
 
   console.log("yero:", num);
   return (
     <div
-      ref={ref}
+      className="cube"
       style={{
-        ...blockStyle,
         background: getColors(num),
         color: num === 2 || num === 4 ? "#645B52" : "#F7F4EF",
       }}
@@ -447,30 +413,18 @@ const Block = forwardRef(({ num }, ref) => {
       {num !== 0 ? num : ""}
     </div>
   );
-});
+};
 
 const style = {
-  blockStyle: {
-    height: 80,
-    width: 80,
-    background: "lightgray",
-    margin: 3,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: 45,
-    fontWeight: "800",
-    color: "white",
-  },
   newGameButton: {
     padding: 10,
-    background: "#846F5B",
+    background: "#2cb67d",
     color: "#F8F5F0",
     width: 95,
     borderRadius: 7,
     fontWeight: "900",
-    marginLeft: "auto",
-    marginBottom: "auto",
+    // marginLeft: "auto",
+    // marginBottom: "auto",
     cursor: "pointer",
   },
   tryAgainButton: {
