@@ -1,10 +1,11 @@
+import "./App.css";
+
 import React, { useState, useEffect } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useEvent, getColors } from "./util";
 import { motion, AnimatePresence } from "framer-motion";
-import { nanoid } from "nanoid";
 
-// import Swipe from "react-easy-swipe";
+import Swipe from "react-easy-swipe";
 
 function Game() {
   const UP_ARROW = 38;
@@ -28,7 +29,7 @@ function Game() {
   const initialize = () => {
     let newGrid = cloneDeep(data);
     var retrievedObject = localStorage.getItem("highScore");
-    setHighScore(JSON.parse(retrievedObject));
+    if (retrievedObject) setHighScore(JSON.parse(retrievedObject));
     addNumber(newGrid);
     console.table(newGrid);
     addNumber(newGrid);
@@ -357,59 +358,65 @@ function Game() {
         <button className="newgamebtn" onClick={resetGame}>
           NEW GAME
         </button>
-        <div className="score-wrapper">
-          <div className="score">
-            <div className="score-wrapper">
-              <span>Score</span>
-              <span className="high-score">Top</span>
-            </div>
-            <div className="score-wrapper">
-              <span>{score}</span>
-              <span className="high-score">{highScore}</span>
-            </div>
+
+        <div className="score">
+          <div className="score-wrapper">
+            <span>Score</span>
+            <span className="high-score">Top</span>
+          </div>
+          <div className="score-wrapper">
+            <span>{score}</span>
+            <span className="high-score">{highScore}</span>
           </div>
         </div>
       </div>
-
-      <div className="cont">
-        {gameOver && (
-          <div style={style.gameOverOverlay}>
-            <div>
-              <div
-                style={{
-                  fontSize: 30,
-                  fontFamily: "sans-serif",
-                  fontWeight: "900",
-                  color: "#FA282E",
-                }}
-              >
-                Game Over
-              </div>
+      <Swipe
+        onSwipeDown={() => swipeDown()}
+        onSwipeLeft={() => swipeLeft()}
+        onSwipeRight={() => swipeRight()}
+        onSwipeUp={() => swipeUp()}
+        style={{ overflowY: "hidden" }}
+      >
+        <div className="cont">
+          {gameOver && (
+            <div style={style.gameOverOverlay}>
               <div>
                 <div
                   style={{
-                    flex: 1,
-                    marginTop: "auto",
+                    fontSize: 30,
+                    fontFamily: "sans-serif",
+                    fontWeight: "900",
+                    color: "#FA282E",
                   }}
                 >
-                  <div onClick={resetGame} style={style.tryAgainButton}>
-                    Try Again
+                  Game Over
+                </div>
+                <div>
+                  <div
+                    style={{
+                      flex: 1,
+                      marginTop: "auto",
+                    }}
+                  >
+                    <div onClick={resetGame} style={style.tryAgainButton}>
+                      Try Again
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-        <AnimatePresence>
-          {data.map((ls) =>
-            ls.map((data, index) => (
-              <Cube key={`${{ index } + { data }}`} num={data} />
-            ))
           )}
-        </AnimatePresence>
-      </div>
 
-      {/* <div>
+          <AnimatePresence>
+            {data.map((ls) =>
+              ls.map((data, index) => (
+                <Cube key={`${{ index } + { data }}`} num={data} />
+              ))
+            )}
+          </AnimatePresence>
+        </div>
+      </Swipe>
+      <div>
         <p class="game-explanation">
           <div>
             <strong class="important">How to play :</strong>
@@ -421,7 +428,7 @@ function Game() {
             <strong>merge into one!</strong>
           </div>
         </p>
-      </div> */}
+      </div>
     </div>
   );
 }

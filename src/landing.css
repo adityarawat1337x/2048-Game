@@ -53,6 +53,7 @@ section {
 }
 .form h3 {
   margin: 0;
+  color: azure;
 }
 .form .inputBx {
   position: relative;
@@ -87,12 +88,16 @@ section {
   font-size: 4.5vh;
   font-weight: bold;
 }
-span {
-  margin: 1vh 1vw;
-}
+
 a {
-  font-size: 7vh;
+  padding: 0.5rem 3rem;
+  font-size: 2rem;
 }
+
+a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 a:visited,
 a:link,
 a:active,
@@ -100,4 +105,10 @@ a:focus {
   text-decoration: none;
   border-color: none;
   color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 420px) {
+  .form h3 {
+    font-size: 5rem;
+  }
 }
