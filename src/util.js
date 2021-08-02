@@ -14,28 +14,51 @@ export const useEvent = (event, handler, passive = false) => {
 
 export const getColors = (num) => {
   switch (num) {
+    // case 2:
+    //   return "#e9c1ca";
+    // case 4:
+    //   return "#ffd6b6";
+    // case 8:
+    //   return "#ef9825";
+    // case 16:
+    //   return "#3cf4b8";
+    // case 32:
+    //   return "#16ffdc";
+    // case 64:
+    //   return "#a6a1c2";
+    // case 128:
+    //   return "#3f7ad0";
+    // case 256:
+    //   return "#2c937e";
+    // case 512:
+    //   return "#14529d";
+    // case 1024:
+    //   return "#08213c";
+    // case 2048:
+    //   return "#add9d8";
+
     case 2:
-      return "#9fdcd4";
+      return "#95CB67";
     case 4:
-      return "#91e0d0";
+      return "#B1CD44";
     case 8:
-      return "#83e3cc";
+      return "#3AB074";
     case 16:
-      return "#75e7c8";
+      return "#3B96D5";
     case 32:
-      return "#67eac4";
+      return "#3165AD";
     case 64:
-      return "#58edc0";
+      return "#514597";
     case 128:
-      return "#4af1bc";
+      return "804796";
     case 256:
-      return "#3cf4b8";
+      return "#BD3690";
     case 512:
-      return "#2ef8b4";
+      return "#E03551";
     case 1024:
-      return "20fbb0";
+      return "#DA432A";
     case 2048:
-      return "#add9d8";
+      return "#E65E22";
 
     default:
       return "#bcd6dd";
@@ -55,3 +78,14 @@ export const getColors = (num) => {
 // #2ef8b4
 // #20fbb0
 // #12ffac
+
+// #e9c1ca
+// #ffd6b6
+// #ef9825
+// #984c8e
+// #be2269
+// #d6343f
+// #3f7ad0
+// #2c937e
+// #14529d
+// #08213c

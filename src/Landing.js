@@ -32,7 +32,6 @@ export default function Landing() {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <h3 className="title">2048</h3>
-
               <Link to="/game">Let's Play</Link>
             </motion.div>
           </div>

@@ -43,7 +43,7 @@
 
 .title {
   font-weight: 800;
-  font-size: 4rem;
+  font-size: 5rem;
   color: #fffffe;
 }
 
@@ -61,11 +61,12 @@
 .App .score-container {
   width: 400px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
 .newgamebtn {
-  padding: 0.5rem;
+  padding: 1.2rem 0.5rem;
   background: #17de8b;
   color: #f8f5f0;
   width: 7rem;
@@ -81,6 +82,7 @@
 }
 
 .App .score {
+  width: 120px;
   padding: 0.5rem;
   background: #a0dce061;
   color: #f8f5f0;
@@ -91,7 +93,6 @@
 
 .App .score-container .score-wrapper {
   display: flex;
-  width: 130px;
   text-align: center;
   align-items: center;
   justify-content: space-around;
@@ -99,4 +100,38 @@
 
 .App .score-container .score-wrapper .high-score {
   opacity: 0.7;
+}
+
+@media only screen and (max-width: 420px) {
+  .App .title {
+    font-size: 3rem;
+  }
+
+  .App .score-container {
+    width: 80%;
+    margin: 2rem;
+  }
+
+  .App .newgamebtn {
+    padding: 0.7rem 0.5rem;
+  }
+
+  .App .score {
+    font-size: 1rem;
+    padding: 0.2rem 0;
+  }
+
+  .App .cont {
+    width: 300px;
+    height: 300px;
+  }
+
+  .game-explanation {
+    font-size: 0.8rem;
+    width: 90%;
+    margin: 2rem;
+  }
+  .game-explanation .important {
+    font-size: 1rem;
+  }
 }
