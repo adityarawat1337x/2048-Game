@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import cloneDeep from "lodash.clonedeep";
 import { useEvent, getColors } from "./util";
 import { motion, AnimatePresence } from "framer-motion";
+import { nanoid } from "nanoid";
 
 // import Swipe from "react-easy-swipe";
 
@@ -362,6 +363,7 @@ function Game() {
           </div>
         </div>
       </div>
+
       <div className="cont">
         {gameOver && (
           <div style={style.gameOverOverlay}>
@@ -371,7 +373,7 @@ function Game() {
                   fontSize: 30,
                   fontFamily: "sans-serif",
                   fontWeight: "900",
-                  color: "#776E65",
+                  color: "#FA282E",
                 }}
               >
                 Game Over
@@ -391,15 +393,6 @@ function Game() {
             </div>
           </div>
         )}
-        {/* <Swipe
-            onSwipeDown={() => {
-              swipeDown();
-            }}
-            onSwipeLeft={() => swipeLeft()}
-            onSwipeRight={() => swipeRight()}
-            onSwipeUp={() => swipeUp()}
-            style={{ overflowY: "hidden" }}
-          > */}
         {/* {data.map((row, oneIndex) => {
               return (
                   {row.map((digit, index) => (
@@ -409,12 +402,14 @@ function Game() {
             })} */}
         <AnimatePresence>
           {data.map(
-            (ls) => ls.map((key, index) => <Cube key={index} num={key} />)
+            (ls, index1) => {
+              return ls.map((key, index) => <Cube key={nanoid()} num={key} />);
+            }
             // <Cube key={ls} num={ls} />
           )}
         </AnimatePresence>
-        {/* </Swipe> */}
       </div>
+
       <div>
         <p class="game-explanation">
           <div>
@@ -433,8 +428,6 @@ function Game() {
 }
 
 const Cube = ({ num }) => {
-  const { blockStyle } = style;
-
   const animation = {
     initial: {
       scale: 0,
@@ -448,13 +441,12 @@ const Cube = ({ num }) => {
     },
   };
 
-  console.log("yero:", num);
   return (
     <motion.div
       className="cube"
       style={{
         background: getColors(num),
-        color: num === 2 || num === 4 ? "#645B52" : "#F7F4EF",
+        color: "#645B52",
       }}
     >
       <motion.div layout>{num !== 0 ? num : ""}</motion.div>
@@ -466,7 +458,7 @@ const style = {
   newGameButton: {
     padding: 10,
     background: "#2cb67d",
-    color: "#F8F5F0",
+    color: "#E34045",
     width: 95,
     borderRadius: 7,
     fontWeight: "900",
@@ -476,8 +468,8 @@ const style = {
   },
   tryAgainButton: {
     padding: 10,
-    background: "#846F5B",
-    color: "#F8F5F0",
+    background: "#E34045",
+    color: "#fff",
     width: 80,
     borderRadius: 7,
     fontWeight: "900",
