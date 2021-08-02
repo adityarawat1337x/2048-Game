@@ -375,11 +375,6 @@ function Game() {
         onSwipeLeft={() => swipeLeft()}
         onSwipeRight={() => swipeRight()}
         onSwipeUp={() => swipeUp()}
-<<<<<<< HEAD
-        // style={{ overflowY: "hidden" }}
-=======
-        style={{ overflowY: "hidden" }}
->>>>>>> 9fb61b29f11a31bcbbabbaa60969334ae7aecee0
       >
         <div className="cont">
           {gameOver && (
