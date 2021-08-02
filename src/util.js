@@ -38,9 +38,9 @@ export const getColors = (num) => {
     //   return "#add9d8";
 
     case 2:
-      return "#95CB67";
+      return "#CACC68";
     case 4:
-      return "#B1CD44";
+      return "#82CC43";
     case 8:
       return "#3AB074";
     case 16:
