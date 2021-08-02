@@ -26,11 +26,9 @@ function Game() {
 
   // Initialize
   const initialize = () => {
-    // console.log("CALLING INITIALIZE");
-
     let newGrid = cloneDeep(data);
-    console.log(newGrid);
-
+    var retrievedObject = localStorage.getItem("highScore");
+    setHighScore(JSON.parse(retrievedObject));
     addNumber(newGrid);
     console.table(newGrid);
     addNumber(newGrid);
@@ -95,6 +93,8 @@ function Game() {
             b[slow] = b[slow] + b[fast];
             b[fast] = 0;
 
+            if (score + b[slow][i] > highScore)
+              setHighScore(score + b[slow][i]);
             setScore(score + b[slow]);
 
             fast = slow + 1;
@@ -144,6 +144,8 @@ function Game() {
             b[slow] = b[slow] + b[fast];
             b[fast] = 0;
 
+            if (score + b[slow][i] > highScore)
+              setHighScore(score + b[slow][i]);
             setScore(score + b[slow]);
 
             fast = slow - 1;
@@ -192,6 +194,8 @@ function Game() {
             b[slow][i] = b[slow][i] + b[fast][i];
             b[fast][i] = 0;
 
+            if (score + b[slow][i] > highScore)
+              setHighScore(score + b[slow][i]);
             setScore(score + b[slow][i]);
 
             fast = slow - 1;
@@ -239,6 +243,8 @@ function Game() {
             b[slow][i] = b[slow][i] + b[fast][i];
             b[fast][i] = 0;
 
+            if (score + b[slow][i] > highScore)
+              setHighScore(score + b[slow][i]);
             setScore(score + b[slow][i]);
 
             fast = slow + 1;
@@ -331,6 +337,7 @@ function Game() {
 
     let gameOverr = checkIfGameOver();
     if (gameOverr) {
+      localStorage.setItem("highScore", JSON.stringify(highScore));
       setGameOver(true);
     }
   };
@@ -358,7 +365,7 @@ function Game() {
             </div>
             <div className="score-wrapper">
               <span>{score}</span>
-              <span className="high-score">{score}</span>
+              <span className="high-score">{highScore}</span>
             </div>
           </div>
         </div>
@@ -393,24 +400,16 @@ function Game() {
             </div>
           </div>
         )}
-        {/* {data.map((row, oneIndex) => {
-              return (
-                  {row.map((digit, index) => (
-                    <Block num={digit} key={index} />
-                  ))}
-              );
-            })} */}
         <AnimatePresence>
-          {data.map(
-            (ls, index1) => {
-              return ls.map((key, index) => <Cube key={nanoid()} num={key} />);
-            }
-            // <Cube key={ls} num={ls} />
+          {data.map((ls) =>
+            ls.map((data, index) => (
+              <Cube key={`${{ index } + { data }}`} num={data} />
+            ))
           )}
         </AnimatePresence>
       </div>
 
-      <div>
+      {/* <div>
         <p class="game-explanation">
           <div>
             <strong class="important">How to play :</strong>
@@ -418,11 +417,11 @@ function Game() {
           <div>
             Use your <strong>arrow keys</strong> to move the tiles.
             <br />
-            When two tiles with the same number touch, they{" "}
+            When two tiles with the same number touch, they
             <strong>merge into one!</strong>
           </div>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }

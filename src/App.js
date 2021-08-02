@@ -1,11 +1,19 @@
 import "./App.css";
 import Game from "./Game";
+import { AnimatePresence } from "framer-motion";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import Landing from "./Landing";
 
 function App() {
   return (
-    <>
-      <Game />
-    </>
+    <Router>
+      <AnimatePresence exitBeforeEnter>
+        <Switch>
+          <Route path="/game" component={Game} />
+          <Route exact path="/" component={Landing} />
+        </Switch>
+      </AnimatePresence>
+    </Router>
   );
 }
 
