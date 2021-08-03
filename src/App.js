@@ -1,6 +1,6 @@
 import Game from "./Game";
 import { AnimatePresence } from "framer-motion";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { Route, Switch, HashRouter as Router } from "react-router-dom";
 import Landing from "./Landing";
 
 function App() {
